@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
+import LoadingGif from "../assets/Loading.gif"
 import { CohereClientV2 } from "cohere-ai"
-import { CircleArrowUp } from 'lucide-react'
+import { CircleArrowUp, CircleCheckBigIcon } from 'lucide-react'
 
 const Chat = () => {
 
@@ -53,14 +54,18 @@ const Chat = () => {
                         :
                         <section ref={containerRef} className='h-[95vh] overflow-y-scroll grid place-items-center'>
                             <div className='w-11/12 md:w-2/4 flex flex-col mb-28 space-y-6'>
-                                <h1>Some repsonse</h1>
                                 {chats.map((val, ind) =>
                                     <div key={ind} className={`flex whitespace-pre-wrap ${val.role === "user" ? "p-2 px-6 self-end bg-cardBG rounded-full"    // for user's chat
                                         : ""}`} >
                                         {val.content}
                                     </div>
                                 )}
-                                <h1>----------END----------</h1>
+                                <div>
+                                    {loading ?
+                                        <img src={LoadingGif} alt="Loading..." className='h-8 rounded-full' />
+                                        : <CircleCheckBigIcon />
+                                    }
+                                </div>
                             </div>
 
                         </section>
